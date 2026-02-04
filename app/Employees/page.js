@@ -7,6 +7,7 @@ export default function EmployeeDirectory() {
       email: "sahil@company.com",
       avatar: "SR",
     },
+    
     {
       id: 2,
       name: "Ankit Sharma",
