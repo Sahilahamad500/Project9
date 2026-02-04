@@ -34,8 +34,6 @@ export default function AttendancePage() {
           </div>
         ))}
       </div>
-
-    
       <div className="bg-white rounded-lg border shadow-sm">
         <div className="p-4 border-b">
           <h2 className="text-lg font-semibold text-gray-800">
@@ -53,6 +51,9 @@ export default function AttendancePage() {
                 <th className="px-4 py-3 text-left">Status</th>
               </tr>
             </thead>
+
+
+            
 
             <tbody className="divide-y">
               {[

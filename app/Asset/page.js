@@ -11,18 +11,13 @@ const AssetManagement = () => {
 
   const [newAsset, setNewAsset] = useState({ name: "", type: "", assignedTo: "", status: "Active" });
   const [search, setSearch] = useState("");
-
-
   const addAsset = () => {
     if (!newAsset.name || !newAsset.type) return;
     setAssets([...assets, { ...newAsset, id: Date.now() }]);
     setNewAsset({ name: "", type: "", assignedTo: "", status: "Active" });
   };
 
-
   const deleteAsset = (id) => setAssets(assets.filter(a => a.id !== id));
-
-
   const filteredAssets = assets.filter(a =>
     a.name.toLowerCase().includes(search.toLowerCase()) ||
     a.type.toLowerCase().includes(search.toLowerCase()) ||

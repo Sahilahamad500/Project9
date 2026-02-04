@@ -7,7 +7,6 @@ export default function EmployeeDirectory() {
       email: "sahil@company.com",
       avatar: "SR",
     },
-    
     {
       id: 2,
       name: "Ankit Sharma",
@@ -59,15 +58,13 @@ export default function EmployeeDirectory() {
           className="w-full sm:w-64 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
-
-     
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {employees.map((emp) => (
           <div
             key={emp.id}
             className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-5"
           >
-     
+    
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold text-lg">
                 {emp.avatar}
@@ -85,9 +82,7 @@ export default function EmployeeDirectory() {
             <div className="text-sm text-gray-600">
               <p>Email:</p>
               <p className="font-medium text-gray-800">{emp.email}</p>
-            </div>
-
-       
+            </div>       
             <div className="mt-4 flex gap-2">
               <button className="flex-1 px-3 py-2 text-sm rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition">
                 View
