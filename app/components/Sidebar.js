@@ -45,16 +45,16 @@ export default function Sidebar() {
   return (
 <div className="w-52 bg-white text-black fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md p-2">
       <ul className="flex flex-col gap-1">
-        {links.map((link) => (
-          <li key={link.href}>
+        {links.map((item) => (
+          <li key={item.href}>
             <Link
-              href={link.href}
+              href={item.href}
               className={`${baseClass} ${
-                isActive(link.href) ? activeClass : hoverClass
+                isActive(item.href) ? activeClass : hoverClass
               }`}
             >
-              {link.icon}
-              <span>{link.label}</span>
+              {item.icon}
+              <span>{item.label}</span>
             </Link>
           </li>
         ))}
