@@ -40,12 +40,12 @@ export default function LeaveManagement() {
 
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-      {/* Header */}
+     
       <h1 className="text-2xl font-semibold text-gray-800">
         Leave Management
       </h1>
 
-      {/* Summary */}
+    
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           { label: "Total Leaves", value: summary.total, color: "bg-blue-500" },
@@ -74,7 +74,7 @@ export default function LeaveManagement() {
         ))}
       </div>
 
-      {/* Apply Leave */}
+     
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Apply Leave</h2>
 
@@ -106,7 +106,7 @@ export default function LeaveManagement() {
         </button>
       </div>
 
-      {/* Leave Requests */}
+    
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Leave Requests</h2>
 

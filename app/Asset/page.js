@@ -29,8 +29,38 @@ const AssetManagement = () => {
     a.assignedTo.toLowerCase().includes(search.toLowerCase())
   );
 
+  // const data = [
+  //   {name: "Rahul kumar",
+  //     city:"banglore",
+  //     mob:"98063578228"
+  //   },
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+  //   {name: "Rahul kumar",city:"banglore",mob:"98063578228"},
+
+  // ]
+
+  // function counter() {
+  //   let count = 0;
+
+  //   return function () {
+  //     count++;
+  //     console.log(count)
+  //   }
+  // }
+
+  // let c = counter();
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+
+    
+      {/* <button onClick={c} className="bg-amber-500">click</button> */}
+
       <h2 className="text-2xl font-semibold mb-4">Asset Management</h2>
       <div className="flex flex-wrap gap-4 mb-6">
         <input
@@ -97,9 +127,9 @@ const AssetManagement = () => {
                 <td className="px-4 py-2">{asset.assignedTo || "-"}</td>
                 <td className="px-4 py-2">
                   <span className={`px-2 py-1 rounded text-white text-xs ${asset.status === "Active" ? "bg-green-500" :
-                      asset.status === "Available" ? "bg-blue-500" :
-                        asset.status === "In Repair" ? "bg-orange-500" :
-                          "bg-gray-500"
+                    asset.status === "Available" ? "bg-blue-500" :
+                      asset.status === "In Repair" ? "bg-orange-500" :
+                        "bg-gray-500"
                     }`}>
                     {asset.status}
                   </span>
@@ -124,6 +154,18 @@ const AssetManagement = () => {
           </tbody>
         </table>
       </div>
+
+        {/* <div className="boreder  border-t-10 border-b-10 border-green-600 mt-8 rounded-4xl">
+              
+              {data.map((item,i) => (
+                <div key={i} className=" flex gap-4 p-4 justify-between">
+                  <p className="border p-3 text-center bg-gray-100">Name={item.name}</p>
+                  <p className="border p-3 text-center bg-gray-100">City={item.city}</p>
+                  <p className="border p-3 text-center bg-gray-100">Mob={item.mob}</p>
+                </div>
+              ))}
+
+          </div> */}
     </div>
   );
 };

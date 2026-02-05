@@ -33,9 +33,9 @@ export default function Sidebar() {
     { href: "/Ticket", label: "Ticket Management", icon: <CheckSquare className="w-3 h-3" /> },
     { href: "/Asset", label: "Asset Management", icon: <Box className="w-3 h-3" /> },
     { href: "/Task", label: "Task Management", icon: <CheckSquare className="w-3 h-3" /> },
-    { href: "/offboarding", label: "Offboarding", icon: <Archive className="w-3 h-3" /> },
-    { href: "/expenses", label: "Expense Management", icon: <DollarSign className="w-3 h-3" /> },
-    { href: "/payroll", label: "Payroll Management", icon: <DollarSign className="w-3 h-3" /> },
+    { href: "/Offbording", label: "Offboarding", icon: <Archive className="w-3 h-3" /> },
+    { href: "/Asset/Expense", label: "Expense Management", icon: <DollarSign className="w-3 h-3" /> },
+    { href: "/Payroll", label: "Payroll Management", icon: <DollarSign className="w-3 h-3" /> },
     { href: "/performance", label: "Performance Management", icon: <BarChart2 className="w-3 h-3" /> },
     { href: "/admin", label: "Admin Settings", icon: <Settings className="w-3 h-3" /> },
   ];
