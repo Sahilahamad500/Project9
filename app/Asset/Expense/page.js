@@ -13,7 +13,7 @@ export default function ExpenseManagement() {
     <div className="min-h-screen bg-gray-100 p-6 flex justify-center">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow p-6 space-y-6">
 
-        {/* Header */}
+       
         <div className="flex items-center justify-between border-b pb-4">
           <div>
             <h1 className="text-2xl font-semibold">Expense Management</h1>
@@ -27,7 +27,7 @@ export default function ExpenseManagement() {
           </button>
         </div>
 
-        {/* Summary */}
+       
         <div className="grid grid-cols-3 gap-4 text-sm">
           <div className="border rounded-xl p-4">
             <p className="text-gray-500">Total Expenses</p>
@@ -43,7 +43,7 @@ export default function ExpenseManagement() {
           </div>
         </div>
 
-        {/* Expense List */}
+      
         <div className="border rounded-xl overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500">
@@ -78,7 +78,7 @@ export default function ExpenseManagement() {
           </table>
         </div>
 
-        {/* Footer Action */}
+
         <div className="flex justify-end">
           <button className="px-5 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800">
             Submit for Approval

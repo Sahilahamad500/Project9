@@ -9,6 +9,16 @@ export default function DocumentManagement() {
     { id: 3, name: "Invoice.xlsx", type: "Excel", status: "Rejected" },
   ]);
 
+
+  const deleteDocument = (id) => setDocuments(documents.filter(item => item.id !== id));
+
+  const [selectedEmp, setSelectedEmp] = useState(null);
+
+
+  const handleShow = (emp) => {
+    setSelectedEmp(emp);
+  };
+
   const statusColor = (status) => {
     switch (status) {
       case "Approved":
@@ -23,15 +33,15 @@ export default function DocumentManagement() {
   };
 
 
-  
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-     
+
       <h1 className="text-2xl font-semibold text-gray-800">
         Document Management
       </h1>
 
-      
+
+
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4 text-gray-600">Upload Document</h2>
         <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -53,7 +63,21 @@ export default function DocumentManagement() {
 
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Documents</h2>
+        {selectedEmp && (
+          <div className="mb-6 p-5 bg-blue-50 border rounded-xl">
+            <h2 className="text-xl font-semibold mb-2">Employee Detail</h2>
+            <p><b>Name:</b> {selectedEmp.name}</p>
+            <p><b>type:</b> {selectedEmp.type}</p>
+            <p><b>status:</b> {selectedEmp.status}</p>
 
+            <button
+              onClick={() => setSelectedEmp(null)}
+              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        )}
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse table-auto">
             <thead>
@@ -79,13 +103,17 @@ export default function DocumentManagement() {
                     </span>
                   </td>
                   <td className="px-4 py-2 flex gap-2">
-                    <button className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm">
+                    <button
+                      onClick={() => handleShow(doc)}
+                      className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm">
                       View
                     </button>
                     <button className="px-3 py-1 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition text-sm">
                       Download
                     </button>
-                    <button className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm">
+                    <button
+                      onClick={() => deleteDocument(doc.id)}
+                      className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm">
                       Delete
                     </button>
                   </td>

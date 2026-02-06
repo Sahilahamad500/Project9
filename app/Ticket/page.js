@@ -10,6 +10,7 @@ export default function TicketManagement() {
       type: "Bug",
       priority: "High",
       status: "Open",
+      description: "User cannot login to the portal",
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ export default function TicketManagement() {
       type: "Request",
       priority: "Medium",
       status: "In Progress",
+      description: "Need new design software installed",
     },
     {
       id: 3,
@@ -24,8 +26,17 @@ export default function TicketManagement() {
       type: "Task",
       priority: "Low",
       status: "Closed",
+      description: "Update user profile details",
     },
   ]);
+
+  const [newTicket, setNewTicket] = useState({
+    title: "",
+    type: "",
+    priority: "",
+    status: "",
+    description: "",
+  });
 
   const statusColor = (status) => {
     switch (status) {
@@ -53,51 +64,103 @@ export default function TicketManagement() {
     }
   };
 
+  const handleSubmit = () => {
+
+    if (!newTicket.title || !newTicket.type || !newTicket.priority || !newTicket.status)
+      return;
+
+
+    setTickets([
+      ...tickets,
+      {
+        id: Date.now(),
+        title: newTicket.title,
+        type: newTicket.type,
+        priority: newTicket.priority,
+        status: newTicket.status,
+        description: newTicket.description,
+      },
+    ]);
+
+
+    setNewTicket({
+      title: "",
+      type: "",
+      priority: "",
+      status: "",
+      description: "",
+    });
+  };
+
+  const deleteTicket = (id) => {
+    setTickets(tickets.filter((t) => t.id !== id));
+  };
+
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-     
-      <h1 className="text-2xl font-semibold text-gray-800">
-        Ticket Management
-      </h1>
+      <h1 className="text-2xl font-semibold text-gray-800">Ticket Management</h1>
 
-     
+
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Create New Ticket</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
+            value={newTicket.title}
+            onChange={(e) => setNewTicket({ ...newTicket, title: e.target.value })}
             placeholder="Ticket Title"
             className="border border-gray-300 rounded-lg px-4 py-2 w-full"
           />
-          <select className="border border-gray-300 rounded-lg px-4 py-2 w-full">
-            <option>Type</option>
+          <select
+            value={newTicket.type}
+            onChange={(e) => setNewTicket({ ...newTicket, type: e.target.value })}
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+          >
+            <option value="">Type</option>
             <option>Bug</option>
             <option>Request</option>
             <option>Task</option>
           </select>
-          <select className="border border-gray-300 rounded-lg px-4 py-2 w-full">
-            <option>Priority</option>
+
+          <select
+            value={newTicket.priority}
+            onChange={(e) => setNewTicket({ ...newTicket, priority: e.target.value })}
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+          >
+            <option value="">Priority</option>
             <option>High</option>
             <option>Medium</option>
             <option>Low</option>
           </select>
-          <select className="border border-gray-300 rounded-lg px-4 py-2 w-full">
-            <option>Status</option>
+
+          <select
+            value={newTicket.status}
+            onChange={(e) => setNewTicket({ ...newTicket, status: e.target.value })}
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+          >
+            <option value="">Status</option>
             <option>Open</option>
             <option>In Progress</option>
             <option>Closed</option>
           </select>
         </div>
+
         <textarea
+          value={newTicket.description}
+          onChange={(e) => setNewTicket({ ...newTicket, description: e.target.value })}
           placeholder="Description..."
           className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-4"
         />
-        <button className="mt-4 px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+
+        <button
+          onClick={handleSubmit}
+          className="mt-4 px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+        >
           Create Ticket
         </button>
       </div>
 
-     
+
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Tickets</h2>
         <div className="overflow-x-auto">
@@ -135,10 +198,16 @@ export default function TicketManagement() {
                     </span>
                   </td>
                   <td className="px-4 py-2 flex gap-2">
-                    <button className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm">
+                    <button
+                      onClick={() => alert(ticket.description)}
+                      className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm"
+                    >
                       View
                     </button>
-                    <button className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm">
+                    <button
+                      onClick={() => deleteTicket(ticket.id)}
+                      className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm"
+                    >
                       Delete
                     </button>
                   </td>
