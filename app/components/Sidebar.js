@@ -25,7 +25,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/", label: "Home", icon: <House className="w-3 h-3" /> },
+    { href: "/home", label: "Home", icon: <House className="w-3 h-3" /> },
     { href: "/Employees", label: "Employees Directory", icon: <Users className="w-3 h-3" /> },
     { href: "/Attendence", label: "Attendance", icon: <Calendar className="w-3 h-3" /> },
     { href: "/Leave", label: "Leave Management", icon: <Clipboard className="w-3 h-3" /> },

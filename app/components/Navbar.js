@@ -8,6 +8,7 @@ export default function Navbar() {
         <nav className="w-full bg-white shadow-md text-black p-4 flex justify-between items-center">
 
             <div className="text-lg ">
+                <Link href="/">
                 <img
                     src="https://hr-screening.s3.ap-south-1.amazonaws.com/collectivWork%20Website%20images/updatedLogo.svg_1763715257799"
                     alt="Logo"
@@ -15,6 +16,7 @@ export default function Navbar() {
                     height={70}
                     className="object-contain"
                 />
+                </Link>
             </div>
 
 
