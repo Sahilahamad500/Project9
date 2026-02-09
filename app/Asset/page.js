@@ -28,51 +28,13 @@ const AssetManagement = () => {
     a.assignedTo.toLowerCase().includes(search.toLowerCase())
   );
 
-  const data = [
-    {
-      name: "Rahul kumar",
-      city: "banglore",
-      mob: "98063578228"
-    },
-    { name: "Rahul kumar", city: "banglore", mob: "98063578228" },
-    { name: "soniu rao", city: "pune", mob: "98063578228" },
-    { name: "bhupendra kumar", city: "banglore", mob: "98063578228" },
-    { name: "Roki kumar", city: "pune", mob: "98063578228" },
-    { name: "pawan rana", city: "banglore", mob: "98063578228" },
-    { name: "Rahul kumar", city: "pune", mob: "98063578228" },
-    { name: "Rahul tomar", city: "banglore", mob: "98063578228" },
-
-  ]
-
-
-  
-  // function counter() {
-  //   let count = 0;
-    
-  //   return function () {
-  //     count++;
-  //     console.log(count)
-  //   }
-  // }
-  
-  // let c = counter();
-  // .filter(item => item.name.toLowerCase().includes("c".toLowerCase()));
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
 
       <div className="boreder mt-8 rounded-4xl">
         <h2 className="text-2xl font-semibold mb-4">Asset Management</h2>
-        {data
-
-          .map((item, i) => (
-            <div key={i} className=" flex gap-4 p-4 justify-between">
-              <p className=" p-3 text-start bg-gray-100">Name={item.name}</p>
-              <p className=" p-3 text-start bg-gray-100">City={item.city}</p>
-              <p className="p-3 text-start bg-gray-100">Mob={item.mob}</p>
-            </div>
-          ))}
       </div>
-      {/* <button onClick={c} className="bg-amber-500">click</button> */}
+     
 
       <h2 className="text-2xl font-semibold mb-4">Asset Management</h2>
       <div className="flex flex-wrap gap-4 mb-6">
