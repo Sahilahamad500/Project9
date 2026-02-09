@@ -30,12 +30,6 @@ const AssetManagement = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-
-      <div className="boreder mt-8 rounded-4xl">
-        <h2 className="text-2xl font-semibold mb-4">Asset Management</h2>
-      </div>
-     
-
       <h2 className="text-2xl font-semibold mb-4">Asset Management</h2>
       <div className="flex flex-wrap gap-4 mb-6">
         <input
