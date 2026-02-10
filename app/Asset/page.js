@@ -14,11 +14,12 @@ const AssetManagement = () => {
 
 
   const addAsset = () => {
-  if (!newAsset.name || !newAsset.type) return;
-  setAssets([...assets, { ...newAsset, id: Date.now() }]);
-  setNewAsset({ name: "", type: "", assignedTo: "", status: "Active" });
-  setSearch(""); 
-};
+    if (!newAsset.name || !newAsset.type)
+      return;   
+    setAssets([...assets, { ...newAsset, id: Date.now() }]);
+    setNewAsset({ name: "", type: "", assignedTo: "", status: "Active" });
+    setSearch("");
+  };
   const deleteAsset = (id) => setAssets(assets.filter(a => a.id !== id));
 
 

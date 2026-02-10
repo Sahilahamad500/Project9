@@ -39,10 +39,31 @@ export default function LeaveManagement() {
     day: "",
     reason: "",
   });
+  const [isInvalid, setIsInvalid] = useState({
+    from: false,
+    to: false,
+    type: false,
+    day: false,
+  });
 
   function handleSubmit() {
-    if (!newLeave.from || !newLeave.to || !newLeave.type || !newLeave.day) return;
+    const fromEmpty = !newLeave.from.trim();
+    const toEmpty = !newLeave.to.trim();
+    const typeEmpty = !newLeave.type.trim();
+    const dayEmpty = !newLeave.day.trim();
 
+    // Update invalid state
+    setIsInvalid({
+      from: fromEmpty,
+      to: toEmpty,
+      type: typeEmpty,
+      day: dayEmpty,
+    });
+
+    // Agar koi field empty ho → return
+    if (fromEmpty || toEmpty || typeEmpty || dayEmpty) return;
+
+    // Add leave request
     setRequests([
       ...requests,
       {
@@ -55,17 +76,11 @@ export default function LeaveManagement() {
       },
     ]);
 
-    setnewLeave({
-      from: "",
-      to: "",
-      type: "",
-      day: "",
-      reason: "",
-    });
-  }
+    // Reset form
+    setnewLeave({ from: "", to: "", type: "", day: "", reason: "" });
 
-  function showApplication() {
-    alert("hello")
+    // Reset invalid state
+    setIsInvalid({ from: false, to: false, type: false, day: false });
   }
 
   const statusStyle = (status) => {
@@ -123,21 +138,33 @@ export default function LeaveManagement() {
           <input
             type="date"
             value={newLeave.from}
-            onChange={(e) => setnewLeave({ ...newLeave, from: e.target.value })}
-            className="border rounded-lg px-4 py-2"
+            onChange={(e) => {
+              setnewLeave({ ...newLeave, from: e.target.value });
+              setIsInvalid({ ...isInvalid, from: false }); 
+            }}
+            className={`border rounded-lg px-4 py-2 ${isInvalid.from ? "border-red-500" : "border-gray-300"
+              }`}
           />
 
           <input
             type="date"
             value={newLeave.to}
-            onChange={(e) => setnewLeave({ ...newLeave, to: e.target.value })}
-            className="border rounded-lg px-4 py-2"
+            onChange={(e) => {
+              setnewLeave({ ...newLeave, to: e.target.value });
+              setIsInvalid({ ...isInvalid, to: false });
+            }}
+            className={`border rounded-lg px-4 py-2 ${isInvalid.to ? "border-red-500" : "border-gray-300"
+              }`}
           />
 
           <select
             value={newLeave.type}
-            onChange={(e) => setnewLeave({ ...newLeave, type: e.target.value })}
-            className="border rounded-lg px-4 py-2"
+            onChange={(e) => {
+              setnewLeave({ ...newLeave, type: e.target.value });
+              setIsInvalid({ ...isInvalid, type: false });
+            }}
+            className={`border rounded-lg px-4 py-2 ${isInvalid.type ? "border-red-500" : "border-gray-300"
+              }`}
           >
             <option value="">Leave Type</option>
             <option>Sick Leave</option>
@@ -147,13 +174,18 @@ export default function LeaveManagement() {
 
           <select
             value={newLeave.day}
-            onChange={(e) => setnewLeave({ ...newLeave, day: e.target.value })}
-            className="border rounded-lg px-4 py-2"
+            onChange={(e) => {
+              setnewLeave({ ...newLeave, day: e.target.value });
+              setIsInvalid({ ...isInvalid, day: false });
+            }}
+            className={`border rounded-lg px-4 py-2 ${isInvalid.day ? "border-red-500" : "border-gray-300"
+              }`}
           >
             <option value="">Day Type</option>
             <option>Full Day</option>
             <option>Half Day</option>
           </select>
+
         </div>
 
         <textarea

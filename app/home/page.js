@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
 
-      {/* Hero Section */}
+    
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div className="space-y-6 mb-12">
           <div className="inline-block">
@@ -64,7 +64,6 @@ export default function HomePage() {
             <p className="text-white">Intuitive APIs and comprehensive documentation</p>
           </div>
 
-         
           <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 border border-slate-800 rounded-xl p-8 hover:border-cyan-500/30 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
             <div className="bg-cyan-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <Globe className="text-cyan-400 transform cursor-pointer transition duration-300 hover:rotate-300 hover:scale-105 " size={24} />
@@ -75,7 +74,6 @@ export default function HomePage() {
         </div>
       </section>
 
-    
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-y border-slate-800">
         <div className="grid md:grid-cols-4 gap-8 text-center">
           <div>
@@ -97,7 +95,6 @@ export default function HomePage() {
         </div>
       </section>
 
-     
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 className="text-4xl font-bold text-black text-center mb-16">What Users Say</h2>
         
@@ -125,8 +122,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-     
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-12">
           <h2 className="text-4xl font-bold text-black mb-4">Ready to Get Started?</h2>

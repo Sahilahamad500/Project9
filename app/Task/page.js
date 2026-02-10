@@ -12,17 +12,17 @@ const TaskManagement = () => {
     const [newTask, setNewTask] = useState({ title: "", assignedTo: "", status: "Pending" });
     const [search, setSearch] = useState("");
 
- 
+
     const addTask = () => {
         if (!newTask.title || !newTask.assignedTo) return;
         setTasks([...tasks, { ...newTask, id: Date.now() }]);
         setNewTask({ title: "", assignedTo: "", status: "Pending" });
     };
 
-   
+
     const deleteTask = (id) => setTasks(tasks.filter(t => t.id !== id));
 
-   
+
     const filteredTasks = tasks.filter(t =>
         t.title.toLowerCase().includes(search.toLowerCase()) ||
         t.assignedTo.toLowerCase().includes(search.toLowerCase())
@@ -32,7 +32,7 @@ const TaskManagement = () => {
         <div className="p-6 bg-gray-50 min-h-screen">
             <h2 className="text-2xl font-semibold mb-4 text-black">Task Management</h2>
 
-            
+
             <div className="flex flex-wrap gap-4 mb-6">
                 <input
                     type="text"
@@ -91,8 +91,8 @@ const TaskManagement = () => {
                                 <td className="px-4 py-2">{task.assignedTo}</td>
                                 <td className="px-4 py-2">
                                     <span className={`px-2 py-1 rounded text-white text-xs ${task.status === "Completed" ? "bg-green-500" :
-                                            task.status === "In Progress" ? "bg-yellow-500" :
-                                                "bg-gray-500"
+                                        task.status === "In Progress" ? "bg-yellow-500" :
+                                            "bg-gray-500"
                                         }`}>
                                         {task.status}
                                     </span>

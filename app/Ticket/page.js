@@ -38,6 +38,14 @@ export default function TicketManagement() {
     description: "",
   });
 
+  const [invalid, setIsInvalid] = useState({
+    title: false,
+    type: false,
+    priority: false,
+    status: false,
+    description: false
+  })
+
   const statusColor = (status) => {
     switch (status) {
       case "Open":
@@ -65,8 +73,22 @@ export default function TicketManagement() {
   };
 
   const handleSubmit = () => {
+    const titleEmpty = !newTicket.title.trim()
+    const typeEmpty = !newTicket.type.trim()
+    const priorityEmpty = !newTicket.priority.trim()
+    const statusEmpty = !newTicket.status.trim()
+    const descriptionEmpty = !newTicket.description.trim()
 
-    if (!newTicket.title || !newTicket.type || !newTicket.priority || !newTicket.status)
+    setIsInvalid({
+      title: titleEmpty,
+      type: typeEmpty,
+      priority: priorityEmpty,
+      status: statusEmpty,
+      description: descriptionEmpty
+    })
+
+    if (titleEmpty || typeEmpty || priorityEmpty || descriptionEmpty || statusEmpty)
+
       return;
 
 
@@ -90,6 +112,15 @@ export default function TicketManagement() {
       status: "",
       description: "",
     });
+
+    setIsInvalid({
+      title: false,
+      type: false,
+      priority: false,
+      status: false,
+      description: false
+    })
+
   };
 
   const deleteTicket = (id) => {
@@ -100,21 +131,26 @@ export default function TicketManagement() {
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
       <h1 className="text-2xl font-semibold text-gray-800">Ticket Management</h1>
 
-
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Create New Ticket</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
             value={newTicket.title}
-            onChange={(e) => setNewTicket({ ...newTicket, title: e.target.value })}
+            onChange={(e) => {
+              setNewTicket({ ...newTicket, title: e.target.value })
+              setIsInvalid({ ...invalid, title: false, })
+            }}
+            className={`border rounded-lg px-4 py-2 w-full ${invalid.title ? "border-red-500" : "border-gray-300"} `}
             placeholder="Ticket Title"
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
           />
           <select
             value={newTicket.type}
-            onChange={(e) => setNewTicket({ ...newTicket, type: e.target.value })}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+            onChange={(e) => {
+              setNewTicket({ ...newTicket, type: e.target.value })
+              setIsInvalid({ ...invalid, type: false, })
+            }}
+            className={`border  rounded-lg px-4 py-2 w-full ${invalid.type ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Type</option>
             <option>Bug</option>
@@ -124,8 +160,11 @@ export default function TicketManagement() {
 
           <select
             value={newTicket.priority}
-            onChange={(e) => setNewTicket({ ...newTicket, priority: e.target.value })}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+            onChange={(e) => {
+              setNewTicket({ ...newTicket, priority: e.target.value })
+              setIsInvalid({ ...invalid, priority: false, })
+            }}
+            className={`border  rounded-lg px-4 py-2 w-full ${invalid.priority ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Priority</option>
             <option>High</option>
@@ -135,8 +174,11 @@ export default function TicketManagement() {
 
           <select
             value={newTicket.status}
-            onChange={(e) => setNewTicket({ ...newTicket, status: e.target.value })}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+            onChange={(e) => {
+              setNewTicket({ ...newTicket, status: e.target.value })
+              setIsInvalid({ ...invalid, status: false, })
+            }}
+            className={`border  rounded-lg px-4 py-2 w-full  ${invalid.status ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Status</option>
             <option>Open</option>
@@ -147,9 +189,12 @@ export default function TicketManagement() {
 
         <textarea
           value={newTicket.description}
-          onChange={(e) => setNewTicket({ ...newTicket, description: e.target.value })}
+          onChange={(e) => {
+            setNewTicket({ ...newTicket, description: e.target.value })
+            setIsInvalid({ ...invalid, description: false, })
+          }}
           placeholder="Description..."
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-4"
+          className={`border  rounded-lg px-4 py-2 w-full mt-4 ${invalid.description ? "border-red-500" : "border-gray-300"} `}
         />
 
         <button
