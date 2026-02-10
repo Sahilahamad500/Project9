@@ -75,7 +75,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
+    
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-y border-slate-800">
         <div className="grid md:grid-cols-4 gap-8 text-center">
           <div>
@@ -97,7 +97,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+     
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 className="text-4xl font-bold text-black text-center mb-16">What Users Say</h2>
         
@@ -126,7 +126,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+     
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-12">
           <h2 className="text-4xl font-bold text-black mb-4">Ready to Get Started?</h2>
@@ -136,49 +136,6 @@ export default function HomePage() {
           </button>
         </div>
       </section>
-
-      {/* Footer */}
-      {/* <footer className="border-t border-slate-800 bg-slate-950/50 py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-white font-bold mb-4">Product</h3>
-              <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white transition">Features</a></li>
-                <li><a href="#" className="hover:text-white transition">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition">Security</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-bold mb-4">Developers</h3>
-              <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white transition">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition">API Reference</a></li>
-                <li><a href="#" className="hover:text-white transition">Examples</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-bold mb-4">Company</h3>
-              <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white transition">About</a></li>
-                <li><a href="#" className="hover:text-white transition">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-bold mb-4">Legal</h3>
-              <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms</a></li>
-                <li><a href="#" className="hover:text-white transition">License</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-slate-800 pt-8 text-center text-slate-500">
-            <p>&copy; 2024 DevHub. All rights reserved.</p>
-          </div>
-        </div>
-      </footer> */}
     </div>
   );
 }
