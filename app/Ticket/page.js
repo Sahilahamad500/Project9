@@ -29,23 +29,6 @@ export default function TicketManagement() {
       description: "Update user profile details",
     },
   ]);
-
-  const [newTicket, setNewTicket] = useState({
-    title: "",
-    type: "",
-    priority: "",
-    status: "",
-    description: "",
-  });
-
-  const [invalid, setIsInvalid] = useState({
-    title: false,
-    type: false,
-    priority: false,
-    status: false,
-    description: false
-  })
-
   const statusColor = (status) => {
     switch (status) {
       case "Open":
@@ -72,6 +55,22 @@ export default function TicketManagement() {
     }
   };
 
+  const [newTicket, setNewTicket] = useState({
+    title: "",
+    type: "",
+    priority: "",
+    status: "",
+    description: "",
+  });
+
+  const [invalid, setIsInvalid] = useState({
+    title: false,
+    type: false,
+    priority: false,
+    status: false,
+    description: false
+  })
+
   const handleSubmit = () => {
     const titleEmpty = !newTicket.title.trim()
     const typeEmpty = !newTicket.type.trim()
@@ -91,7 +90,6 @@ export default function TicketManagement() {
 
       return;
 
-
     setTickets([
       ...tickets,
       {
@@ -103,7 +101,6 @@ export default function TicketManagement() {
         description: newTicket.description,
       },
     ]);
-
 
     setNewTicket({
       title: "",

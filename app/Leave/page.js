@@ -145,7 +145,6 @@ export default function LeaveManagement() {
             className={`border rounded-lg px-4 py-2 ${isInvalid.from ? "border-red-500" : "border-gray-300"
               }`}
           />
-
           <input
             type="date"
             value={newLeave.to}
@@ -156,7 +155,6 @@ export default function LeaveManagement() {
             className={`border rounded-lg px-4 py-2 ${isInvalid.to ? "border-red-500" : "border-gray-300"
               }`}
           />
-
           <select
             value={newLeave.type}
             onChange={(e) => {
