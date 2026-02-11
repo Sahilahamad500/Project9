@@ -52,7 +52,7 @@ export default function LeaveManagement() {
     const typeEmpty = !newLeave.type.trim();
     const dayEmpty = !newLeave.day.trim();
 
-    // Update invalid state
+
     setIsInvalid({
       from: fromEmpty,
       to: toEmpty,
@@ -60,10 +60,10 @@ export default function LeaveManagement() {
       day: dayEmpty,
     });
 
-    // Agar koi field empty ho → return
+
     if (fromEmpty || toEmpty || typeEmpty || dayEmpty) return;
 
-    // Add leave request
+
     setRequests([
       ...requests,
       {
@@ -76,10 +76,10 @@ export default function LeaveManagement() {
       },
     ]);
 
-    // Reset form
+
     setnewLeave({ from: "", to: "", type: "", day: "", reason: "" });
 
-    // Reset invalid state
+
     setIsInvalid({ from: false, to: false, type: false, day: false });
   }
 
@@ -140,7 +140,7 @@ export default function LeaveManagement() {
             value={newLeave.from}
             onChange={(e) => {
               setnewLeave({ ...newLeave, from: e.target.value });
-              setIsInvalid({ ...isInvalid, from: false }); 
+              setIsInvalid({ ...isInvalid, from: false });
             }}
             className={`border rounded-lg px-4 py-2 ${isInvalid.from ? "border-red-500" : "border-gray-300"
               }`}
@@ -166,7 +166,7 @@ export default function LeaveManagement() {
             className={`border rounded-lg px-4 py-2 ${isInvalid.type ? "border-red-500" : "border-gray-300"
               }`}
           >
-            <option value="">Leave Type</option>
+            <option>Leave Type</option>
             <option>Sick Leave</option>
             <option>Casual Leave</option>
             <option>Earned Leave</option>
