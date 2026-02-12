@@ -22,7 +22,7 @@ export default function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full">
 
-        <Link href="/components">
+        <Link href="/home">
           <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl p-8 cursor-pointer">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">HRMS</h2>
           </div>
