@@ -16,7 +16,7 @@ import {
   Archive,
 } from "@deemlol/next-icons";
 
-const baseClass = "flex items-center gap-2 px-4 py-2 rounded-lg transition-colors text-[12px] w-50";
+const baseClass = "flex items-center gap-2 px-4 py-2 transition-colors text-[12px] w-full";
 
 const activeClass = "bg-blue-500 text-white";
 const hoverClass = "hover:bg-blue-300";
@@ -43,7 +43,7 @@ export default function Sidebar() {
   const isActive = (href) => pathname?.toLowerCase() === href.toLowerCase();
 
   return (
-<div className="w-52 bg-white text-black fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md p-2">
+<div className="w-52 bg-white text-black fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
       <ul className="flex flex-col gap-1">
         {links.map((item) => (
           <li key={item.href}>

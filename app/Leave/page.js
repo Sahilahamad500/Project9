@@ -179,7 +179,7 @@ export default function LeaveManagement() {
             className={`border rounded-lg px-4 py-2 ${isInvalid.day ? "border-red-500" : "border-gray-300"
               }`}
           >
-            <option value="">Day Type</option>
+            <option>Day Type</option>
             <option>Full Day</option>
             <option>Half Day</option>
           </select>
