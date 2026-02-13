@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FileText } from "@deemlol/next-icons";
 import toast from "react-hot-toast";
 
@@ -9,23 +9,13 @@ import toast from "react-hot-toast";
 export default function LeaveManagement() {
   const [selectedLeave, setSelectedLeave] = useState(null);
 
-  const [requests, setRequests] = useState([
-    {
-      id: 1,
-      type: "Sick Leave",
-      from: "2026-02-10",
-      to: "2026-02-12",
-      status: "Approved",
-      reason: "medical reason"
-    },
-    {
-      id: 2,
-      type: "Casual Leave",
-      from: "2026-02-20",
-      to: "2026-02-21",
-      status: "Pending",
-    },
-  ]);
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/leave")
+      .then(res => res.json())
+      .then(data => setRequests(data));
+  }, []);
 
   const summary = {
     total: 24,
@@ -48,12 +38,11 @@ export default function LeaveManagement() {
     day: false,
   });
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const fromEmpty = !newLeave.from.trim();
     const toEmpty = !newLeave.to.trim();
     const typeEmpty = !newLeave.type.trim();
     const dayEmpty = !newLeave.day.trim();
-
 
     setIsInvalid({
       from: fromEmpty,
@@ -62,31 +51,39 @@ export default function LeaveManagement() {
       day: dayEmpty,
     });
 
-
     if (fromEmpty || toEmpty || typeEmpty || dayEmpty) {
-      toast.error("Please fill all required fields")
+      toast.error("Please fill all required fields");
       return;
     }
 
-
-    setRequests(prev => [
-      ...prev,
-      {
-        id: Date.now(),
-        type: newLeave.type,
-        from: newLeave.from,
-        to: newLeave.to,
-        status: "Pending",
-        reason: newLeave.reason,
-      },
-    ]);
-
-    toast.success("Leave request submitted successfully");
-    setnewLeave({ from: "", to: "", type: "", day: "", reason: "" });
+    try {
+      await fetch("/api/leave", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...newLeave,
+          status: "Pending",
+        }),
+      });
 
 
-    setIsInvalid({ from: false, to: false, type: false, day: false });
+      const res = await fetch("/api/leave");
+      const data = await res.json();
+      setRequests(data);
+
+      toast.success("Leave request submitted successfully");
+      setnewLeave({ from: "", to: "", type: "", day: "", reason: "" });
+
+      setIsInvalid({ from: false, to: false, type: false, day: false });
+
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   }
+
+  
 
   const statusStyle = (status) => {
     switch (status) {
@@ -169,10 +166,10 @@ export default function LeaveManagement() {
             className={`border rounded-lg px-4 py-2 ${isInvalid.type ? "border-red-500" : "border-gray-300"
               }`}
           >
-            <option>Leave Type</option>
-            <option>Sick Leave</option>
-            <option>Casual Leave</option>
-            <option>Earned Leave</option>
+            <option value="">Leave Type</option>
+            <option value="Sick Leave">Sick Leave</option>
+            <option value="Casual Leave">Casual Leave</option>
+            <option value="Earned Leave">Earned Leave</option>
           </select>
 
           <select
