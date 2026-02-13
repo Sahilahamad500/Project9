@@ -205,50 +205,48 @@ export default function LeaveManagement() {
         </button>
       </div>
 
-      {selectedLeave && (
-        <div className="bg-blue-50 border rounded-xl p-5">
-          <h3 className="text-lg font-semibold mb-2">
-            Leave Application Detail
-          </h3>
 
-          <p><b>Type:</b> {selectedLeave.type}</p>
-          <p><b>From:</b> {selectedLeave.from}</p>
-          <p><b>To:</b> {selectedLeave.to}</p>
-          <p><b>Status:</b> {selectedLeave.status}</p>
-          <p><b>reason:</b> {selectedLeave.reason}</p>
-
-
-          <button
-            onClick={() => setSelectedLeave(null)}
-            className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
-          >
-            Close
-          </button>
-        </div>
-      )}
 
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Leave Requests</h2>
+        {selectedLeave && (
+          <div className="bg-blue-50 border rounded-xl p-5">
+            <h3 className="text-lg font-semibold mb-2">
+              Leave Application Detail
+            </h3>
 
-        <div className="space-y-3">
+            <p><b>Type:</b> {selectedLeave.type}</p>
+            <p><b>From:</b> {selectedLeave.from}</p>
+            <p><b>To:</b> {selectedLeave.to}</p>
+            <p><b>Status:</b> {selectedLeave.status}</p>
+            <p><b>reason:</b> {selectedLeave.reason}</p>
+
+            <button
+              onClick={() => setSelectedLeave(null)}
+              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        )}
+        <div className="space-y-3 mt-2">
           {requests.map((req) => (
             <div
               key={req.id}
               className="flex items-center justify-between border rounded-lg p-4"
             >
-
               <div>
                 <p className="font-medium">{req.type}</p>
                 <p className="text-sm text-gray-500">
                   {req.from} → {req.to}
                 </p>
               </div>
-
               <span
                 onClick={() => setSelectedLeave(req)}
                 className="cursor-pointer"
               >
                 <FileText size={14} className="text-blue-500" />
+
               </span>
 
               <span
