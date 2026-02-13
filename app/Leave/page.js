@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { House } from "@deemlol/next-icons";
+import { FileText } from "@deemlol/next-icons";
+import toast from "react-hot-toast";
 
 
 
@@ -15,6 +16,7 @@ export default function LeaveManagement() {
       from: "2026-02-10",
       to: "2026-02-12",
       status: "Approved",
+      reason: "medical reason"
     },
     {
       id: 2,
@@ -61,11 +63,14 @@ export default function LeaveManagement() {
     });
 
 
-    if (fromEmpty || toEmpty || typeEmpty || dayEmpty) return;
+    if (fromEmpty || toEmpty || typeEmpty || dayEmpty) {
+      toast.error("Please fill all required fields")
+      return;
+    }
 
 
-    setRequests([
-      ...requests,
+    setRequests(prev => [
+      ...prev,
       {
         id: Date.now(),
         type: newLeave.type,
@@ -76,7 +81,7 @@ export default function LeaveManagement() {
       },
     ]);
 
-
+    toast.success("Leave request submitted successfully");
     setnewLeave({ from: "", to: "", type: "", day: "", reason: "" });
 
 
@@ -190,7 +195,7 @@ export default function LeaveManagement() {
           value={newLeave.reason}
           onChange={(e) => setnewLeave({ ...newLeave, reason: e.target.value })}
           placeholder="Reason for leave..."
-          className="w-full border rounded-lg px-4 py-2 mt-4"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-4"
         />
 
         <button
@@ -243,7 +248,7 @@ export default function LeaveManagement() {
                 onClick={() => setSelectedLeave(req)}
                 className="cursor-pointer"
               >
-                <House size={14} className="text-blue-500" />
+                <FileText size={14} className="text-blue-500" />
               </span>
 
               <span

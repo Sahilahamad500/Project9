@@ -1,6 +1,7 @@
 // app/components/TaskManagement.js
 "use client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const TaskManagement = () => {
     const [tasks, setTasks] = useState([
@@ -9,14 +10,46 @@ const TaskManagement = () => {
         { id: 3, title: "Deploy v1.0", assignedTo: "Alex", status: "Completed" },
     ]);
 
-    const [newTask, setNewTask] = useState({ title: "", assignedTo: "", status: "Pending" });
     const [search, setSearch] = useState("");
+    const [newTask, setNewTask] = useState(
+        {
+            title: "",
+            assignedTo: "",
+            status: ""
+        });
+
+    const [inveled, setInveled] = useState(
+        {
+            title: false,
+            assignedTo: false,
+            status: false
+        }
+    )
 
 
     const addTask = () => {
-        if (!newTask.title || !newTask.assignedTo) return;
+        const titleEmpty = !newTask.title.trim()
+        const assignedToEmpty = !newTask.assignedTo.trim()
+        const statusEmpty = !newTask.status.trim()
+
+
+        setInveled({
+            title: titleEmpty,
+            assignedTo: assignedToEmpty,
+            status: statusEmpty,
+
+        })
+
+        if (!newTask.title || !newTask.assignedTo || !newTask.status) {
+            toast.error("Please all field required ")
+            return;
+        }
         setTasks([...tasks, { ...newTask, id: Date.now() }]);
         setNewTask({ title: "", assignedTo: "", status: "Pending" });
+        setInveled({ title: false, assignedTo: false, status: false });
+        setSearch("")
+
+        toast.success("Your task is added successfully")
     };
 
 
@@ -31,35 +64,48 @@ const TaskManagement = () => {
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
             <h2 className="text-2xl font-semibold mb-4 text-black">Task Management</h2>
-
-
             <div className="flex flex-wrap gap-4 mb-6">
                 <input
                     type="text"
                     placeholder="Search tasks..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="flex-1 min-w-[200px] px-3 py-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+                    className="flex-1 min-w-[200px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
                 />
 
                 <input
                     type="text"
                     placeholder="Task Title"
                     value={newTask.title}
-                    onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                    className="flex-1 min-w-[150px] px-3 py-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+                    onChange={(e) => {
+                        setNewTask({ ...newTask, title: e.target.value })
+                        setInveled({ ...inveled, title: false })
+                    }}
+                    className={`flex-1 min-w-[150px] px-3 py-2 border  rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black 
+                        ${inveled.title ? "border-red-500" : "border-blue-400"}
+                        `}
                 />
                 <input
                     type="text"
                     placeholder="Assigned To"
                     value={newTask.assignedTo}
-                    onChange={(e) => setNewTask({ ...newTask, assignedTo: e.target.value })}
-                    className="flex-1 min-w-[150px] px-3 py-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+                    onChange={(e) => {
+                        setNewTask({ ...newTask, assignedTo: e.target.value })
+                        setInveled({ ...inveled, assignedTo: false })
+                    }}
+                    className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black
+                        ${inveled.assignedTo ? "border-red-500" : "border-blue-400"}
+                        `}
                 />
                 <select
                     value={newTask.status}
-                    onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}
-                    className="flex-1 min-w-[120px] px-3 py-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                    onChange={(e) => {
+                        setNewTask({ ...newTask, status: e.target.value })
+                        setInveled({ ...inveled, status: false })
+                    }}
+                    className={`flex-1 min-w-[150px] px-3 py-2 border  rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black 
+                        ${inveled.status ? "border-red-500" : "border-blue-400"}
+                        `}
                 >
                     <option>Pending</option>
                     <option>In Progress</option>

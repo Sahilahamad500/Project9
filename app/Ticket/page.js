@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function TicketManagement() {
   const [tickets, setTickets] = useState([
@@ -86,9 +87,11 @@ export default function TicketManagement() {
       description: descriptionEmpty
     })
 
-    if (titleEmpty || typeEmpty || priorityEmpty || descriptionEmpty || statusEmpty)
-
+    if (titleEmpty || typeEmpty || priorityEmpty || descriptionEmpty || statusEmpty){
+       toast.error(" Please all field is required")
       return;
+    }
+
 
     setTickets([
       ...tickets,
@@ -117,7 +120,7 @@ export default function TicketManagement() {
       status: false,
       description: false
     })
-
+      toast.success("Your ticket is added successfully")
   };
 
   const deleteTicket = (id) => {

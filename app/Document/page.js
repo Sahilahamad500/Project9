@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function DocumentManagement() {
   const [documents, setDocuments] = useState([
@@ -18,6 +19,11 @@ export default function DocumentManagement() {
   const handleShow = (emp) => {
     setSelectedEmp(emp);
   };
+
+   function handleClick () {
+     toast.error("Please select the document")
+   }
+
 
   const statusColor = (status) => {
     switch (status) {
@@ -54,7 +60,9 @@ export default function DocumentManagement() {
             placeholder="Document Name"
             className="border rounded-lg px-4 py-2 flex-1 border-gray-400"
           />
-          <button className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+          <button 
+          onClick={handleClick}
+          className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
             Upload
           </button>
         </div>

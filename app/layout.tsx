@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutContent from "./components/component/layout";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,6 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="h-screen antialiased">
+          <Toaster position="top-right" toastOptions={{
+            className: "text-sm"
+          }}/>
         <LayoutContent>{children}</LayoutContent>
       </body>
     </html>

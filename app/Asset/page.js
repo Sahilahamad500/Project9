@@ -1,6 +1,7 @@
 // app/components/AssetManagement.js
 "use client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AssetManagement = () => {
   const [assets, setAssets] = useState([
@@ -9,16 +10,49 @@ const AssetManagement = () => {
     { id: 3, name: "Projector Epson", type: "Equipment", assignedTo: "-", status: "Available" },
   ]);
 
-  const [newAsset, setNewAsset] = useState({ name: "", type: "", assignedTo: "", status: "Active" });
+  const [newAsset, setNewAsset] = useState(
+    {
+      name: "",
+      type: "",
+      assignedTo: "",
+      status: "Active"
+    }
+  );
   const [search, setSearch] = useState("");
+  const [inveled, setInveled] = useState(
+    {
+      name: false,
+      type: false,
+      assignedTo: false,
+      status: false
+    }
+  )
 
 
   const addAsset = () => {
-    if (!newAsset.name || !newAsset.type)
-      return;   
+    const nameEmpty = !newAsset.name.trim()
+    const typeEmpty = !newAsset.type.trim()
+    const assignedTo = !newAsset.assignedTo.trim()
+    const status = !newAsset.status.trim()
+
+    setInveled({
+      name: nameEmpty,
+      type: typeEmpty,
+      assignedTo: assignedTo,
+      status: status,
+    });
+
+
+    if (!newAsset.name || !newAsset.type || !newAsset.assignedTo || !newAsset.status) {
+      toast.error("Please all field is requred")
+      return;
+    }
     setAssets([...assets, { ...newAsset, id: Date.now() }]);
     setNewAsset({ name: "", type: "", assignedTo: "", status: "Active" });
+    setInveled({ name: false, type: false, assignedTo: false, status: false, })
     setSearch("");
+
+    toast.success("Your asset are added successfully")
   };
   const deleteAsset = (id) => setAssets(assets.filter(a => a.id !== id));
 
@@ -44,27 +78,44 @@ const AssetManagement = () => {
           type="text"
           placeholder="Asset Name"
           value={newAsset.name}
-          onChange={(e) => setNewAsset({ ...newAsset, name: e.target.value })}
-          className="flex-1 min-w-[200px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+          onChange={(e) => {
+            setNewAsset({ ...newAsset, name: e.target.value });
+            setInveled({ ...inveled, name: false });
+          }}
+          className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.name ? "border-red-500" : "border-blue-600"
+            }`}
         />
+
         <input
           type="text"
           placeholder="Type"
           value={newAsset.type}
-          onChange={(e) => setNewAsset({ ...newAsset, type: e.target.value })}
-          className="flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+          onChange={(e) => {
+            setNewAsset({ ...newAsset, type: e.target.value });
+            setInveled({ ...inveled, type: false });
+          }}
+          className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.type ? "border-red-500" : "border-blue-600"
+            }`}
         />
         <input
           type="text"
           placeholder="Assigned To"
           value={newAsset.assignedTo}
-          onChange={(e) => setNewAsset({ ...newAsset, assignedTo: e.target.value })}
-          className="flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black"
+          onChange={(e) => {
+            setNewAsset({ ...newAsset, assignedTo: e.target.value });
+            setInveled({ ...inveled, assignedTo: false });
+          }}
+          className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.assignedTo ? "border-red-500" : "border-blue-600"
+            }`}
         />
         <select
           value={newAsset.status}
-          onChange={(e) => setNewAsset({ ...newAsset, status: e.target.value })}
-          className="flex-1 min-w-[120px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+         onChange={(e) => {
+            setNewAsset({ ...newAsset, assignedTo: e.target.value });
+            setInveled({ ...inveled, assignedTo: false });
+          }}
+          className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.assignedTo ? "border-red-500" : "border-blue-600"
+            }`}
         >
           <option>Active</option>
           <option>Available</option>
