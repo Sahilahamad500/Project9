@@ -70,7 +70,7 @@ export default function Navbar() {
                     <button className="w-auto pe-1 hover:bg-blue-50 pointer-coarse:">
                         <select
                             onChange={(e) => {
-                                const value = e.target.value
+                                const value = e.target.value 
                                 setIsRunning(true)
                             }}
                             className=" text-center appearance-none border-none outline-none focus:outline-none bg-transparent text-sm text-blue-500">
