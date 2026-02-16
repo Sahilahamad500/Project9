@@ -43,7 +43,7 @@ export default function Sidebar() {
   const isActive = (href) => pathname?.toLowerCase() === href.toLowerCase();
 
   return (
-<div className="w-52 bg-white text-black fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
+<div className="w-52 bg-white text-black fixed top-15 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
       <ul className="flex flex-col gap-1">
         {links.map((item) => (
           <li key={item.href}>

@@ -68,7 +68,6 @@ export default function LeaveManagement() {
         }),
       });
 
-
       const res = await fetch("/api/leave");
       const data = await res.json();
       setRequests(data);
@@ -83,7 +82,7 @@ export default function LeaveManagement() {
     }
   }
 
-  
+
 
   const statusStyle = (status) => {
     switch (status) {
@@ -108,16 +107,8 @@ export default function LeaveManagement() {
         {[
           { label: "Total Leaves", value: summary.total, color: "bg-blue-500" },
           { label: "Used", value: summary.used, color: "bg-red-500" },
-          {
-            label: "Remaining",
-            value: summary.remaining,
-            color: "bg-green-500",
-          },
-          {
-            label: "Pending",
-            value: summary.pending,
-            color: "bg-yellow-500",
-          },
+          { label: "Remaining", value: summary.remaining, color: "bg-green-500" },
+          { label: "Pending", value: summary.pending, color: "bg-yellow-500", },
         ].map((item) => (
           <div
             key={item.label}
