@@ -15,9 +15,9 @@ export default function LayoutContent({ children }) {
                 <Navbar />
             </div>
 
-            <div className="flex pt-16">
+            <div className="flex pt-15">
                 {showSidebar && (
-                    <div className="fixed top-16 left-0 w-52 h-[calc(100vh-4rem)] z-40">
+                    <div className="fixed  left-0 w-52 h-[calc(100vh-4rem)] z-40">
                         <Sidebar />
                     </div>
                 )}
