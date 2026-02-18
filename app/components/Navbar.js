@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { Mail, Bell, Grid } from "@deemlol/next-icons";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-
+    const router = useRouter();
 
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -40,7 +41,20 @@ export default function Navbar() {
                 </Link>
             </div>
 
+
+
             <ul className="flex gap-6  items-center">
+                <button
+                    onClick={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("isLoggedIn");
+                        router.push("/login"); 
+                    }}
+                    className=" rounded-2xl p-1 px-3 bg-blue-500 text-white hover:bg-red-500 cursor-pointer"
+                >
+                    Logout
+                </button>
+
                 <li>
                     <Link href="/">
                         <Grid className="w-5 h-5 hover:text-blue-300" />
@@ -57,6 +71,7 @@ export default function Navbar() {
                     </Link>
                 </li>
 
+
                 <div className="border border-blue-100 flex justify-between rounded" >
 
                     <button onClick={() => setIsRunning(false)} className="w-22 py-1 ps-2 cursor-pointer  hover:bg-blue-50 " >
@@ -70,7 +85,7 @@ export default function Navbar() {
                     <button className="w-auto pe-1 hover:bg-blue-50 pointer-coarse:">
                         <select
                             onChange={(e) => {
-                                const value = e.target.value 
+                                const value = e.target.value
                                 setIsRunning(true)
                             }}
                             className=" text-center appearance-none border-none outline-none focus:outline-none bg-transparent text-sm text-blue-500">

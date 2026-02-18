@@ -14,7 +14,7 @@ export default function LayoutContent({ children }) {
     }
 
 
-    // const showSidebar = pathname.startsWith("/home");
+   
    const showSidebar = pathname !== "/" && pathname.startsWith("/");
 
 
