@@ -54,7 +54,7 @@ export default function Navbar() {
                 >
                     Logout
                 </button>
-
+                    
                 <li>
                     <Link href="/">
                         <Grid className="w-5 h-5 hover:text-blue-300" />
