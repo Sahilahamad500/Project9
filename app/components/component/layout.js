@@ -7,7 +7,17 @@ import Footer from "../Footer";
 
 export default function LayoutContent({ children }) {
     const pathname = usePathname();
-    const showSidebar = pathname !== "/";
+
+
+    if (pathname === "/login") {
+        return <>{children}</>;
+    }
+
+
+    // const showSidebar = pathname.startsWith("/home");
+   const showSidebar = pathname !== "/" && pathname.startsWith("/");
+
+
 
     return (
         <div className="flex flex-col h-screen">
@@ -27,7 +37,7 @@ export default function LayoutContent({ children }) {
                         }`}
                 >
                     {children}
-                    <Footer/>
+                    <Footer />
                 </main>
             </div>
         </div>

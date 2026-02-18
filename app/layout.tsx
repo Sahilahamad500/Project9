@@ -1,7 +1,7 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutContent from "./components/component/layout";
+import AuthWrapper from "./components/Authwraper";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -17,12 +17,29 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="h-screen antialiased">
-          <Toaster position="top-right" toastOptions={{
-            className: "text-sm"
-          }}/>
-        <LayoutContent>{children}</LayoutContent>
+        <Toaster position="top-right" toastOptions={{
+          className: "text-sm"
+        }} />
+        <AuthWrapper>
+          <LayoutContent>
+            {children}
+          </LayoutContent>
+        </AuthWrapper>
       </body>
     </html>
   );
 }
 
+
+//  return (
+//     <html lang="en">
+//       <body className="h-screen antialiased">
+//         <Toaster position="top-right" />
+//         <AuthWrapper>
+//           <LayoutContent>
+//             {children}
+//           </LayoutContent>
+//         </AuthWrapper>
+//       </body>
+//     </html>
+//   );
