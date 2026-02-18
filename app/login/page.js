@@ -31,10 +31,6 @@ export default function LoginPage() {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center  relative overflow-hidden '>
-     {/* <div className=' w-full h-[100vh] rounded-2xl bg-[url("/bg.jpg")] bg-cover bg-center'>
-        
-      </div> */}
-
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -43,7 +39,8 @@ export default function LoginPage() {
       </div>
 
       <div className="relative z-10 w-full max-w-md  ">
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 shadow-2xl">
+        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 shadow-2xl  mx-4 md:mx-auto
+">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mb-4 shadow-lg">
               <Lock className="w-7 h-7 text-white" />
