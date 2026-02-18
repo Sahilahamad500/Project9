@@ -36,8 +36,7 @@ export default function Sidebar() {
       icon: <Calendar className="w-3 h-3" />,
       children: [
         { href: "/Attendence", label: "Overview" },
-        { href: "/Attendence/Web", label: "Web Punch" },
-        { href: "/Attendence/Remote", label: "Remote Punch" },
+       
       ],
     },
 
