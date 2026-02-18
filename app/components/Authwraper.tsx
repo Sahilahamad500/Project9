@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function AuthWrapper({ children }: { children: React.ReactNode }) {
@@ -8,7 +8,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
     if (!isLoggedIn && pathname !== "/login") {
@@ -22,9 +22,9 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     }
 
     setAllowed(true);
-  });
+  }, [pathname, router]);
 
-  if (!allowed) return null;
+  if (!allowed) return null; 
 
   return <>{children}</>;
 }
