@@ -13,7 +13,7 @@ export default function Offboarding() {
 
 
   function handleClick () {
-       toast.success("Task Added Successfully");
+    toast.success("Task Added Successfully");
   }
 
 
@@ -21,7 +21,7 @@ export default function Offboarding() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow p-6 space-y-6">
 
-      
+
         <div className="border-b pb-4">
           <h1 className="text-2xl font-semibold">Employee Offboarding</h1>
           <p className="text-sm text-gray-500">
@@ -29,7 +29,7 @@ export default function Offboarding() {
           </p>
         </div>
 
-       
+
         <div className="rounded-xl border p-4 grid grid-cols-2 gap-4 text-sm">
           <p><span className="text-gray-500">Name:</span> Aman Rana</p>
           <p><span className="text-gray-500">Role:</span> Frontend Developer</p>
@@ -37,7 +37,7 @@ export default function Offboarding() {
           <p><span className="text-gray-500">Last Working Day:</span> 20 Feb 2026</p>
         </div>
 
-     
+
         <div className="rounded-xl border p-4">
           <h2 className="font-medium mb-3">Offboarding Checklist</h2>
           <div className="space-y-2 text-sm">
@@ -50,7 +50,7 @@ export default function Offboarding() {
           </div>
         </div>
 
-       
+
         <div className="rounded-xl border p-4">
           <h2 className="font-medium mb-2">Exit Reason</h2>
           <select className="w-full border rounded-lg px-3 py-2 text-sm">
@@ -61,7 +61,7 @@ export default function Offboarding() {
           </select>
         </div>
 
-  
+
         <div className="rounded-xl border p-4">
           <h2 className="font-medium mb-3">Assets Returned</h2>
           <div className="flex gap-6 text-sm">
@@ -77,14 +77,14 @@ export default function Offboarding() {
           </div>
         </div>
 
-   
+
         <div className="bg-gray-50 rounded-xl p-4 flex items-center justify-between">
           <p className="text-sm text-gray-600">
             All steps completed? Finalize offboarding.
           </p>
-          <button 
-          onClick={handleClick}
-          className="px-5 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800">
+          <button
+            onClick={handleClick}
+            className="px-5 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800">
             Finalize
           </button>
         </div>

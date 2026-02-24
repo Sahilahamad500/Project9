@@ -6,22 +6,22 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
 
-    
+
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div className="space-y-6 mb-12">
           <div className="inline-block">
             <span className="text-black border border-blue-600/30 px-6 py-4 rounded-full text-sm font-bold">
-               Welcome to the future
+              Welcome to the future
             </span>
           </div>
-          
+
           <h1 className="text-5xl  font-bold text-blue-600">
             Build Amazing Things
             <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               With Modern Tools
             </span>
           </h1>
-          
+
           <p className="text-xl text-black max-w-2xl mx-auto">
             Everything you need to create stunning web applications. Fast, powerful, and developer-friendly.
           </p>
@@ -38,7 +38,7 @@ export default function HomePage() {
 
       </section>
 
-     
+
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-black mb-4">Powerful Features</h2>
@@ -46,7 +46,7 @@ export default function HomePage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-       
+
           <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 border border-slate-800 rounded-xl p-8 hover:border-blue-500/30 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
             <div className="bg-blue-600/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <Zap className="text-blue-600 transform cursor-pointer transition duration-300 hover:rotate-350 hover:scale-105 " size={24} />
@@ -55,7 +55,7 @@ export default function HomePage() {
             <p className="text-white">Optimized for performance with zero compromises</p>
           </div>
 
-     
+
           <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 border border-slate-800 rounded-xl p-8 hover:border-purple-500/30 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
             <div className="bg-purple-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 ">
               <Code className="text-purple-400 transform cursor-pointer transition duration-300 hover:rotate-300 hover:scale-105 " size={24} />
@@ -97,9 +97,9 @@ export default function HomePage() {
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 className="text-4xl font-bold text-black text-center mb-16">What Users Say</h2>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 border border border-slate-800 rounded-xl shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer p-8"> 
+          <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 border border border-slate-800 rounded-xl shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer p-8">
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-yellow-300 text-yellow-300" />)}
             </div>
