@@ -56,7 +56,7 @@ export default function Sidebar() {
     pathname?.toLowerCase() === href.toLowerCase();
 
   return (
-    <div className="w-52 bg-white text-black fixed top-15 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
+    <div className="w-52 bg-white text-black fixed top-15 pt-3 left-0 h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
       <ul className="flex flex-col gap-1">
         {links.map((item, index) => (
           <li key={index}>

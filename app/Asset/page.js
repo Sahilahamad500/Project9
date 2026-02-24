@@ -52,6 +52,9 @@ const AssetManagement = () => {
     setInveled({ name: false, type: false, assignedTo: false, status: false, })
     setSearch("");
 
+
+
+    
     toast.success("Your asset are added successfully")
   };
   const deleteAsset = (id) => setAssets(assets.filter(a => a.id !== id));
@@ -182,3 +185,5 @@ const AssetManagement = () => {
 };
 
 export default AssetManagement;
+
+
