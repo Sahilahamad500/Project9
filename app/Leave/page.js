@@ -149,6 +149,7 @@ export default function LeaveManagement() {
               }`}
           />
           <select
+          
             value={newLeave.type}
             onChange={(e) => {
               setnewLeave({ ...newLeave, type: e.target.value });
