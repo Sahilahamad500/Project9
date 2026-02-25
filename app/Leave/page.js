@@ -78,11 +78,11 @@ export default function LeaveManagement() {
       setIsInvalid({ from: false, to: false, type: false, day: false });
 
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong");  
     }
   }
 
-
+  
 
   const statusStyle = (status) => {
     switch (status) {

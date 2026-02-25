@@ -1,15 +1,32 @@
 "use client";
 
 
+import { useState,useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function Offboarding() {
+  const [products,setProducts] = useState([]);
   const checklist = [
     "Company assets returned",
     "Knowledge transfer completed",
     "System access revoked",
     "Exit interview completed",
   ];
+
+
+  useEffect(() => {
+    const apicall = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products")
+        const data = await res.json();
+        setProducts(data);
+        console.log(data)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    apicall();
+  }, [])
 
 
   function handleClick () {

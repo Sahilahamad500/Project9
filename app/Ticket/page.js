@@ -1,35 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function TicketManagement() {
-  const [tickets, setTickets] = useState([
-    {
-      id: 1,
-      title: "Cannot login to system",
-      type: "Bug",
-      priority: "High",
-      status: "Open",
-      description: "User cannot login to the portal",
-    },
-    {
-      id: 2,
-      title: "Request new software",
-      type: "Request",
-      priority: "Medium",
-      status: "In Progress",
-      description: "Need new design software installed",
-    },
-    {
-      id: 3,
-      title: "Update profile info",
-      type: "Task",
-      priority: "Low",
-      status: "Closed",
-      description: "Update user profile details",
-    },
-  ]);
+
   const statusColor = (status) => {
     switch (status) {
       case "Open":
@@ -39,7 +14,7 @@ export default function TicketManagement() {
       case "Closed":
         return "bg-green-100 text-green-700";
       default:
-        return "";
+        return ""; 
     }
   };
 
@@ -56,6 +31,7 @@ export default function TicketManagement() {
     }
   };
 
+  const [tickets, setTickets] = useState([]);
   const [newTicket, setNewTicket] = useState({
     title: "",
     type: "",
@@ -63,6 +39,20 @@ export default function TicketManagement() {
     status: "",
     description: "",
   });
+
+  const fetchTickets = async () => {
+    try {
+      const res = await fetch("/api/ticket");
+      const data = await res.json();
+      setTickets(data);
+    } catch (err) {
+      toast.error("failed to fetch tickets");
+    }
+  }
+
+  useEffect(() => {
+    fetchTickets();
+  }, [])
 
   const [invalid, setIsInvalid] = useState({
     title: false,
@@ -72,55 +62,60 @@ export default function TicketManagement() {
     description: false
   })
 
-  const handleSubmit = () => {
-    const titleEmpty = !newTicket.title.trim()
-    const typeEmpty = !newTicket.type.trim()
-    const priorityEmpty = !newTicket.priority.trim()
-    const statusEmpty = !newTicket.status.trim()
-    const descriptionEmpty = !newTicket.description.trim()
+  const handleSubmit = async () => {
+    const titleEmpty = !newTicket.title.trim();
+    const typeEmpty = !newTicket.type.trim();
+    const priorityEmpty = !newTicket.priority.trim();
+    const statusEmpty = !newTicket.status.trim();
+    const descriptionEmpty = !newTicket.description.trim();
 
     setIsInvalid({
       title: titleEmpty,
       type: typeEmpty,
       priority: priorityEmpty,
       status: statusEmpty,
-      description: descriptionEmpty
-    })
+      description: descriptionEmpty,
+    });
 
-    if (titleEmpty || typeEmpty || priorityEmpty || descriptionEmpty || statusEmpty){
-       toast.error(" Please all field is required")
+    if (titleEmpty || typeEmpty || priorityEmpty || statusEmpty || descriptionEmpty) {
+      toast.error("All fields are required");
       return;
     }
 
+    try {
+      const res = await fetch("/api/ticket", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTicket),
+      });
 
-    setTickets([
-      ...tickets,
-      {
-        id: Date.now(),
-        title: newTicket.title,
-        type: newTicket.type,
-        priority: newTicket.priority,
-        status: newTicket.status,
-        description: newTicket.description,
-      },
-    ]);
+      if (!res.ok) {
+        throw new Error("API failed");
+      }
 
-    setNewTicket({
-      title: "",
-      type: "",
-      priority: "",
-      status: "",
-      description: "",
-    });
+      toast.success("Ticket added successfully");
 
-    setIsInvalid({
-      title: false,
-      type: false,
-      priority: false,
-      status: false,
-      description: false
-    })
-      toast.success("Your ticket is added successfully")
+      await fetchTickets();
+
+      setNewTicket({
+        title: "",
+        type: "",
+        priority: "",
+        status: "",
+        description: "",
+      });
+
+      setIsInvalid({
+        title: false,
+        type: false,
+        priority: false,
+        status: false,
+        description: false,
+      });
+
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
   };
 
   const deleteTicket = (id) => {
