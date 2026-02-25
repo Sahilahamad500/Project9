@@ -19,17 +19,17 @@ import {
 } from "@deemlol/next-icons";
 
 const baseClass =
-  "flex items-center gap-2 px-4 py-2 transition-colors text-[12px] w-full";
+  "flex items-center gap-2 px-4 py-2 transition-colors text-[12px] w-full";  
 const activeClass = "bg-blue-500 text-white";
 const hoverClass = "hover:bg-blue-300";
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState(null);
+  const [openMenu, setOpenMenu] = useState(null);  
 
   const links = [
     { href: "/home", label: "Home", icon: <House className="w-3 h-3" /> },
-    { href: "/Employees", label: "Employees Directory", icon: <Users className="w-3 h-3" /> },
+    { href: "/Employees", label: "Employees Directory", icon: <Users className="w-3 h-3" /> }, 
 
     {
       label: "Attendance",
