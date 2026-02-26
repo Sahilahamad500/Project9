@@ -149,7 +149,7 @@ export default function LeaveManagement() {
               }`}
           />
           <select
-          
+
             value={newLeave.type}
             onChange={(e) => {
               setnewLeave({ ...newLeave, type: e.target.value });
@@ -191,11 +191,11 @@ export default function LeaveManagement() {
           onClick={handleSubmit}
           className="mt-4 px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
           Submit Leave
-        </button>
+        </button> 
       </div>
 
 
-
+      
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Leave Requests</h2>
         {selectedLeave && (
@@ -218,7 +218,7 @@ export default function LeaveManagement() {
             </button>
           </div>
         )}
-        <div className="space-y-3 mt-2">
+        <div className="space-y-3 mt-2">       
           {requests.map((req) => (
             <div
               key={req.id}

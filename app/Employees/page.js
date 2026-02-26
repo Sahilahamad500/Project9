@@ -120,7 +120,7 @@ export default function EmployeeDirectory() {
             </div>
 
 
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex gap-2"> 
               <button
                 onClick={() => handleShow(emp)}
                 className="flex-1 px-3 py-2 text-sm rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition">

@@ -1,28 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 
+const fileToBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+
+
 export default function DocumentManagement() {
-  const [documents, setDocuments] = useState([
-    { id: 1, name: "Resume.pdf", type: "PDF", status: "Approved" },
-    { id: 2, name: "Contract.docx", type: "Word", status: "Pending" },
-    { id: 3, name: "Invoice.xlsx", type: "Excel", status: "Rejected" },
-  ]);
-
-
-  const deleteDocument = (id) => setDocuments(documents.filter(item => item.id !== id));
-
+  const [documents, setDocuments] = useState([]);
+  const [file, setFile] = useState(null);
+  const [docName, setDocName] = useState("");
   const [selectedEmp, setSelectedEmp] = useState(null);
+  const [preview, setPreview] = useState(null);
 
+  const fileInputRef = useRef(null);
+
+
+  useEffect(() => {
+    const savedDocs = localStorage.getItem("documents");
+    if (savedDocs) {
+      setDocuments(JSON.parse(savedDocs));
+    }
+  }, []);
+
+
+  async function handleUpload() {
+    if (!file || !docName) {
+      toast.error("Please select file and enter document name");
+      return;
+    } else {
+
+      const base64 = await fileToBase64(file);
+
+      const newDoc = {
+        id: Date.now(),
+        name: docName,
+        type: file.type,
+        status: "Pending",
+        fileData: base64,
+      };
+
+      const updatedDocs = [...documents, newDoc];
+      setDocuments(updatedDocs);
+
+      localStorage.setItem("documents", JSON.stringify(updatedDocs));
+
+      toast.success("Document saved locally");
+
+      setFile(null);
+      setDocName("");
+      setPreview(null);
+    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
+
+  const deleteDocument = (id) => {
+    const updatedDocs = documents.filter(doc => doc.id !== id);
+    setDocuments(updatedDocs);
+    localStorage.setItem("documents", JSON.stringify(updatedDocs));
+    toast.success("Document deleted");
+  };
 
   const handleShow = (emp) => {
     setSelectedEmp(emp);
   };
-
-   function handleClick () {
-     toast.error("Please select the document")
-   }
 
 
   const statusColor = (status) => {
@@ -38,7 +86,6 @@ export default function DocumentManagement() {
     }
   };
 
-
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
 
@@ -52,40 +99,49 @@ export default function DocumentManagement() {
         <h2 className="text-lg font-semibold mb-4 text-gray-600">Upload Document</h2>
         <div className="flex flex-col sm:flex-row gap-4 items-center">
           <input
+            ref={fileInputRef}
             type="file"
-            className="border rounded-lg px-4 py-2 w-full sm:w-auto border-gray-400 "
+            onChange={(e) => {
+              const selectedFile = e.target.files[0];
+              setFile(selectedFile);
+
+              if (selectedFile && selectedFile.type.startsWith("image/")) {
+                setPreview(URL.createObjectURL(selectedFile));
+              } else {
+                setPreview(null);
+              }
+            }}
+            className="border rounded-lg px-4 py-2 w-full sm:w-auto border-gray-400"
           />
           <input
             type="text"
+            value={docName}
             placeholder="Document Name"
+            onChange={(e) => setDocName(e.target.value)}
             className="border rounded-lg px-4 py-2 flex-1 border-gray-400"
           />
-          <button 
-          onClick={handleClick}
-          className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-            Upload
+          <button
+            onClick={handleUpload}
+            className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            Upload    
           </button>
         </div>
+        {preview && (
+          <div className="mt-4">
+            <p className="text-sm text-gray-500 mb-1">Preview:</p>
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-24 h-24 object-cover rounded-lg border"
+            />
+          </div>
+        )}
       </div>
 
 
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Documents</h2>
-        {selectedEmp && (
-          <div className="mb-6 p-5 bg-blue-50 border rounded-xl">
-            <h2 className="text-xl font-semibold mb-2">Employee Detail</h2>
-            <p><b>Name:</b> {selectedEmp.name}</p>
-            <p><b>type:</b> {selectedEmp.type}</p>
-            <p><b>status:</b> {selectedEmp.status}</p>
 
-            <button
-              onClick={() => setSelectedEmp(null)}
-              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
-            >
-              Close
-            </button>
-          </div>
-        )}
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse table-auto">
             <thead>
@@ -113,12 +169,28 @@ export default function DocumentManagement() {
                   <td className="px-4 py-2 flex gap-2">
                     <button
                       onClick={() => handleShow(doc)}
-                      className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm">
+                      className="px-3 py-1 rounded-lg bg-green-500 text-white text-sm"
+                    >
                       View
                     </button>
-                    <button className="px-3 py-1 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition text-sm">
+                    <button
+                      onClick={() => {
+                        const a = document.createElement("a");
+                        a.href = doc.fileData;
+                        a.download = doc.name;
+                        a.click();
+                      }}
+                      className="px-3 py-1 rounded-lg bg-blue-500 text-white text-sm"
+                    >
                       Download
                     </button>
+                    {/* <a
+                      href={doc.fileUrl}
+                      download
+                      className="px-3 py-1 rounded-lg bg-blue-500 text-white text-sm"
+                    >
+                      Download
+                    </a> */}
                     <button
                       onClick={() => deleteDocument(doc.id)}
                       className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm">
@@ -131,6 +203,36 @@ export default function DocumentManagement() {
           </table>
         </div>
       </div>
+      {selectedEmp && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white w-[90%] max-w-md rounded-xl p-6 relative shadow-lg">
+
+            <h2 className="text-xl font-semibold mb-2">Document Detail</h2>
+
+            <p><b>Name:</b> {selectedEmp.name}</p>
+            <p><b>Type:</b> {selectedEmp.type}</p>
+            <p><b>Status:</b> {selectedEmp.status}</p>
+
+            {selectedEmp.type.startsWith("image/") && (
+              <div className="mt-4">
+                <p className="text-sm text-gray-500 mb-1">Preview:</p>
+                <img
+                  src={selectedEmp.fileData}
+                  alt={selectedEmp.name}
+                  className="w-full h-48 object-cover rounded-lg border"
+                />
+              </div>
+            )}
+
+            <button
+              onClick={() => setSelectedEmp(null)}
+              className="mt-5 w-full py-2 bg-red-500 text-white rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
