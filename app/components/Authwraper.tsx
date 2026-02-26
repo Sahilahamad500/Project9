@@ -17,7 +17,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     }
 
     if (isLoggedIn && pathname === "/login") {
-      router.replace("/");
+      router.replace("/"); 
       return;
     }
 
@@ -26,5 +26,5 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 
   if (!allowed) return null; 
 
-  return <>{children}</>;
+  return <>{children}</>; 
 }
