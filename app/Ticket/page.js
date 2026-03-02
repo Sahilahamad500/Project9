@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 export default function TicketManagement() {
 
@@ -14,7 +16,7 @@ export default function TicketManagement() {
       case "Closed":
         return "bg-green-100 text-green-700";
       default:
-        return ""; 
+        return "";
     }
   };
 
@@ -31,6 +33,7 @@ export default function TicketManagement() {
     }
   };
 
+  const [selectedTicket, setSelectedTicket] = useState(null);
   const [tickets, setTickets] = useState([]);
   const [newTicket, setNewTicket] = useState({
     title: "",
@@ -118,6 +121,13 @@ export default function TicketManagement() {
     }
   };
 
+  const handleEnterSUbmit = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
+
   const deleteTicket = (id) => {
     setTickets(tickets.filter((t) => t.id !== id));
   };
@@ -136,6 +146,7 @@ export default function TicketManagement() {
               setNewTicket({ ...newTicket, title: e.target.value })
               setIsInvalid({ ...invalid, title: false, })
             }}
+            onKeyDown={handleEnterSUbmit}
             className={`border rounded-lg px-4 py-2 w-full ${invalid.title ? "border-red-500" : "border-gray-300"} `}
             placeholder="Ticket Title"
           />
@@ -145,6 +156,7 @@ export default function TicketManagement() {
               setNewTicket({ ...newTicket, type: e.target.value })
               setIsInvalid({ ...invalid, type: false, })
             }}
+            onKeyDown={handleEnterSUbmit}
             className={`border  rounded-lg px-4 py-2 w-full ${invalid.type ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Type</option>
@@ -159,6 +171,7 @@ export default function TicketManagement() {
               setNewTicket({ ...newTicket, priority: e.target.value })
               setIsInvalid({ ...invalid, priority: false, })
             }}
+            onKeyDown={handleEnterSUbmit}
             className={`border  rounded-lg px-4 py-2 w-full ${invalid.priority ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Priority</option>
@@ -173,6 +186,7 @@ export default function TicketManagement() {
               setNewTicket({ ...newTicket, status: e.target.value })
               setIsInvalid({ ...invalid, status: false, })
             }}
+            onKeyDown={handleEnterSUbmit}
             className={`border  rounded-lg px-4 py-2 w-full  ${invalid.status ? "border-red-500" : "border-gray-300"} `}
           >
             <option value="">Status</option>
@@ -188,6 +202,7 @@ export default function TicketManagement() {
             setNewTicket({ ...newTicket, description: e.target.value })
             setIsInvalid({ ...invalid, description: false, })
           }}
+          onKeyDown={handleEnterSUbmit}
           placeholder="Description..."
           className={`border  rounded-lg px-4 py-2 w-full mt-4 ${invalid.description ? "border-red-500" : "border-gray-300"} `}
         />
@@ -239,7 +254,7 @@ export default function TicketManagement() {
                   </td>
                   <td className="px-4 py-2 flex gap-2">
                     <button
-                      onClick={() => alert(ticket.description)}
+                      onClick={() => setSelectedTicket(ticket)}
                       className="px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600 transition text-sm"
                     >
                       View
@@ -257,6 +272,30 @@ export default function TicketManagement() {
           </table>
         </div>
       </div>
+      <Drawer
+        open={!!selectedTicket}
+        direction="right"
+        size={400}
+        // onClose={handleClose}
+        onClose={() => setSelectedTicket(null)}
+      >
+
+        <div className="p-4 ">
+          <h2 className="text-xl font-semibold mb-3">{selectedTicket?.title}</h2>
+          <p><span className="text-gray-500">Type:</span> {selectedTicket?.type}</p>
+          <p><span className="text-gray-500">Priority:</span> {selectedTicket?.priority}</p>
+          <p><span className="text-gray-500">Status:</span> {selectedTicket?.status}</p>
+          <p className="mt-4">{selectedTicket?.description}</p>
+        </div>
+
+        <button
+           onClick={() => setSelectedTicket(null)}
+          className=" px-4 py-2 ms-4 rounded-lg bg-red-600 text-white cursor-pointer "
+        >
+          Close
+        </button>
+      </Drawer>
+
     </div>
   );
 }

@@ -55,6 +55,13 @@ const TaskManagement = () => {
 
     const deleteTask = (id) => setTasks(tasks.filter(t => t.id !== id));
 
+      const handler = (e) => {
+        if(e.key === "Enter") {
+           e.preventDefault();
+           addTask();
+        }
+      }
+
 
     const filteredTasks = tasks.filter(t =>
         t.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -81,6 +88,7 @@ const TaskManagement = () => {
                         setNewTask({ ...newTask, title: e.target.value })
                         setInveled({ ...inveled, title: false })
                     }}
+                     onKeyDown={handler}
                     className={`flex-1 min-w-[150px] px-3 py-2 border  rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black 
                         ${inveled.title ? "border-red-500" : "border-blue-400"}
                         `}
@@ -93,6 +101,7 @@ const TaskManagement = () => {
                         setNewTask({ ...newTask, assignedTo: e.target.value })
                         setInveled({ ...inveled, assignedTo: false })
                     }}
+                     onKeyDown={handler}
                     className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black
                         ${inveled.assignedTo ? "border-red-500" : "border-blue-400"}
                         `}
@@ -103,6 +112,7 @@ const TaskManagement = () => {
                         setNewTask({ ...newTask, status: e.target.value })
                         setInveled({ ...inveled, status: false })
                     }}
+                     onKeyDown={handler}
                     className={`flex-1 min-w-[150px] px-3 py-2 border  rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black 
                         ${inveled.status ? "border-red-500" : "border-blue-400"}
                         `}

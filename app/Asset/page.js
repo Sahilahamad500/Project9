@@ -54,11 +54,25 @@ const AssetManagement = () => {
 
 
 
-    
+
     toast.success("Your asset are added successfully")
   };
   const deleteAsset = (id) => setAssets(assets.filter(a => a.id !== id));
 
+
+  const handler = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addAsset();
+    }
+  }
+
+  // function handler (e) {
+  //    if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     addAsset();
+  //   }
+  // }
 
   const filteredAssets = assets.filter(a =>
     a.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -85,6 +99,7 @@ const AssetManagement = () => {
             setNewAsset({ ...newAsset, name: e.target.value });
             setInveled({ ...inveled, name: false });
           }}
+          onKeyDown={handler}
           className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.name ? "border-red-500" : "border-blue-600"
             }`}
         />
@@ -97,6 +112,7 @@ const AssetManagement = () => {
             setNewAsset({ ...newAsset, type: e.target.value });
             setInveled({ ...inveled, type: false });
           }}
+          onKeyDown={handler}
           className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.type ? "border-red-500" : "border-blue-600"
             }`}
         />
@@ -108,15 +124,17 @@ const AssetManagement = () => {
             setNewAsset({ ...newAsset, assignedTo: e.target.value });
             setInveled({ ...inveled, assignedTo: false });
           }}
+          onKeyDown={handler}
           className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.assignedTo ? "border-red-500" : "border-blue-600"
             }`}
         />
         <select
           value={newAsset.status}
-         onChange={(e) => {
+          onChange={(e) => {
             setNewAsset({ ...newAsset, assignedTo: e.target.value });
             setInveled({ ...inveled, assignedTo: false });
           }}
+          onKeyDown={handler}
           className={`flex-1 min-w-[150px] px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-black ${inveled.assignedTo ? "border-red-500" : "border-blue-600"
             }`}
         >
@@ -126,7 +144,7 @@ const AssetManagement = () => {
           <option>Retired</option>
         </select>
         <button
-          onClick={addAsset}
+          onKeyDown={addAsset}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Add Asset
