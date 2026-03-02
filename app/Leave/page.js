@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { FileText } from "@deemlol/next-icons";
 import toast from "react-hot-toast";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 
 
@@ -78,11 +80,17 @@ export default function LeaveManagement() {
       setIsInvalid({ from: false, to: false, type: false, day: false });
 
     } catch (error) {
-      toast.error("Something went wrong");  
+      toast.error("Something went wrong");
     }
   }
 
-  
+  const handleEnterSubmit = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
+
 
   const statusStyle = (status) => {
     switch (status) {
@@ -135,6 +143,7 @@ export default function LeaveManagement() {
               setnewLeave({ ...newLeave, from: e.target.value });
               setIsInvalid({ ...isInvalid, from: false });
             }}
+            onKeyDown={handleEnterSubmit}
             className={`border rounded-lg px-4 py-2 ${isInvalid.from ? "border-red-500" : "border-gray-300"
               }`}
           />
@@ -145,6 +154,7 @@ export default function LeaveManagement() {
               setnewLeave({ ...newLeave, to: e.target.value });
               setIsInvalid({ ...isInvalid, to: false });
             }}
+            onKeyDown={handleEnterSubmit}
             className={`border rounded-lg px-4 py-2 ${isInvalid.to ? "border-red-500" : "border-gray-300"
               }`}
           />
@@ -155,6 +165,7 @@ export default function LeaveManagement() {
               setnewLeave({ ...newLeave, type: e.target.value });
               setIsInvalid({ ...isInvalid, type: false });
             }}
+            onKeyDown={handleEnterSubmit}
             className={`border rounded-lg px-4 py-2 ${isInvalid.type ? "border-red-500" : "border-gray-300"
               }`}
           >
@@ -170,6 +181,7 @@ export default function LeaveManagement() {
               setnewLeave({ ...newLeave, day: e.target.value });
               setIsInvalid({ ...isInvalid, day: false });
             }}
+            onKeyDown={handleEnterSubmit}
             className={`border rounded-lg px-4 py-2 ${isInvalid.day ? "border-red-500" : "border-gray-300"
               }`}
           >
@@ -183,6 +195,7 @@ export default function LeaveManagement() {
         <textarea
           value={newLeave.reason}
           onChange={(e) => setnewLeave({ ...newLeave, reason: e.target.value })}
+          onKeyDown={handleEnterSubmit}
           placeholder="Reason for leave..."
           className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-4"
         />
@@ -191,34 +204,15 @@ export default function LeaveManagement() {
           onClick={handleSubmit}
           className="mt-4 px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
           Submit Leave
-        </button> 
+        </button>
       </div>
 
 
-      
+
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Leave Requests</h2>
-        {selectedLeave && (
-          <div className="bg-blue-50 border rounded-xl p-5">
-            <h3 className="text-lg font-semibold mb-2">
-              Leave Application Detail
-            </h3>
 
-            <p><b>Type:</b> {selectedLeave.type}</p>
-            <p><b>From:</b> {selectedLeave.from}</p>
-            <p><b>To:</b> {selectedLeave.to}</p>
-            <p><b>Status:</b> {selectedLeave.status}</p>
-            <p><b>reason:</b> {selectedLeave.reason}</p>
-
-            <button
-              onClick={() => setSelectedLeave(null)}
-              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
-            >
-              Close
-            </button>
-          </div>
-        )}
-        <div className="space-y-3 mt-2">       
+        <div className="space-y-3 mt-2">
           {requests.map((req) => (
             <div
               key={req.id}
@@ -249,6 +243,53 @@ export default function LeaveManagement() {
           ))}
         </div>
       </div>
+      {/* {selectedLeave && (
+         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
+          <div className="bg-blue-50 border  w-[50%] rounded-xl p-5">
+            <h3 className="text-lg font-semibold mb-2">
+              Leave Application Detail
+            </h3>
+
+            <p><b>Type:</b> {selectedLeave.type}</p>
+            <p><b>From:</b> {selectedLeave.from}</p>
+            <p><b>To:</b> {selectedLeave.to}</p>
+            <p><b>Status:</b> {selectedLeave.status}</p>
+            <p><b>reason:</b> {selectedLeave.reason}</p>
+
+            <button
+              onClick={() => setSelectedLeave(null)}
+              className="mt-3 px-3 py-1 bg-red-500 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        )} */}
+
+      <Drawer
+        open={!!selectedLeave}
+        direction="right"
+        size={400}
+      >
+        <div className="p-5 bg-blue-50 h-full">
+          <h3 className="text-lg font-semibold mb-4">
+            Leave Application Detail
+          </h3>
+
+          <p><b>Type:</b> {selectedLeave?.type}</p>
+          <p><b>From:</b> {selectedLeave?.from}</p>
+          <p><b>To:</b> {selectedLeave?.to}</p>
+          <p><b>Status:</b> {selectedLeave?.status}</p>
+          <p><b>Reason:</b> {selectedLeave?.reason}</p>
+
+          <button
+            onClick={() => setSelectedLeave(null)}
+            className="mt-5 px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Close
+          </button>
+        </div>
+      </Drawer>
     </div>
   );
 }

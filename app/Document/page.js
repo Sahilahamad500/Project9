@@ -18,7 +18,7 @@ export default function DocumentManagement() {
   const [docName, setDocName] = useState("");
   const [selectedEmp, setSelectedEmp] = useState(null);
   const [preview, setPreview] = useState(null);
-
+  
   const fileInputRef = useRef(null);
 
 
@@ -93,8 +93,6 @@ export default function DocumentManagement() {
         Document Management
       </h1>
 
-
-
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4 text-gray-600">Upload Document</h2>
         <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -118,12 +116,18 @@ export default function DocumentManagement() {
             value={docName}
             placeholder="Document Name"
             onChange={(e) => setDocName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleUpload();
+              }
+            }}
             className="border rounded-lg px-4 py-2 flex-1 border-gray-400"
           />
           <button
             onClick={handleUpload}
             className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-            Upload    
+            Upload
           </button>
         </div>
         {preview && (
