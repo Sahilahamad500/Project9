@@ -18,7 +18,7 @@ export default function DocumentManagement() {
   const [docName, setDocName] = useState("");
   const [selectedEmp, setSelectedEmp] = useState(null);
   const [preview, setPreview] = useState(null);
-  
+
   const fileInputRef = useRef(null);
 
 
@@ -28,7 +28,6 @@ export default function DocumentManagement() {
       setDocuments(JSON.parse(savedDocs));
     }
   }, []);
-
 
   async function handleUpload() {
     if (!file || !docName) {
@@ -72,6 +71,19 @@ export default function DocumentManagement() {
     setSelectedEmp(emp);
   };
 
+  const updateHandler = (emp) => {
+    const updatedDocs = documents.map((doc) =>
+      doc.id === emp.id
+        ? { ...doc, status: "Approved" }
+        : doc
+    );
+
+    setDocuments(updatedDocs);
+    localStorage.setItem("documents", JSON.stringify(updatedDocs));
+
+    setSelectedEmp(null);
+    toast.success("Document status updated");
+  };
 
   const statusColor = (status) => {
     switch (status) {
@@ -142,7 +154,6 @@ export default function DocumentManagement() {
         )}
       </div>
 
-
       <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Documents</h2>
 
@@ -188,13 +199,7 @@ export default function DocumentManagement() {
                     >
                       Download
                     </button>
-                    {/* <a
-                      href={doc.fileUrl}
-                      download
-                      className="px-3 py-1 rounded-lg bg-blue-500 text-white text-sm"
-                    >
-                      Download
-                    </a> */}
+
                     <button
                       onClick={() => deleteDocument(doc.id)}
                       className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm">
@@ -227,13 +232,19 @@ export default function DocumentManagement() {
                 />
               </div>
             )}
-
-            <button
-              onClick={() => setSelectedEmp(null)}
-              className="mt-5 w-full py-2 bg-red-500 text-white rounded-lg"
-            >
-              Close
-            </button>
+            <div className=" flex justify-between gap-2">
+              <button
+                onClick={() => setSelectedEmp(null)}
+                className="mt-5 w-full py-2 bg-red-500 text-white rounded-sm "
+              >
+                {/* <span>&#2325; &#230;</span> */}   Close   
+              </button>
+              <button
+                onClick={() => updateHandler(selectedEmp)}
+                className="mt-5 w-full py-2 bg-blue-500 text-white rounded-sm">
+                Update
+              </button>
+            </div>
           </div>
         </div>
       )}
