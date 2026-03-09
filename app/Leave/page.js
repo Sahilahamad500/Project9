@@ -199,7 +199,7 @@ export default function LeaveManagement() {
           placeholder="Reason for leave..."
           className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-4"
         />
-
+        
         <button
           onClick={handleSubmit}
           className="mt-4 px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
@@ -287,6 +287,11 @@ export default function LeaveManagement() {
             className="mt-5 px-4 py-2 bg-red-500 text-white rounded"
           >
             Close
+          </button>
+          <button
+          
+           className="mt-5 px-4 ms-4 py-2 bg-blue-500 text-white rounded">
+              Update
           </button>
         </div>
       </Drawer>
